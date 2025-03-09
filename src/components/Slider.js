@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import FirstSliderImage from "../assets/first-slider-image.jpg";
 import SecondSliderImage from "../assets/second-slider-image.jpg";
@@ -14,7 +14,17 @@ import Thumb4 from "../assets/thumb4.svg";
 import Thumb5 from "../assets/thumb5.svg";
 
 const Slider = () => {
-  const [currentSlide, setCurrentSlide] = useState(2); // Start with middle slide
+  const [currentSlide, setCurrentSlide] = useState(2);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const slides = [
     { image: FirstSliderImage, thumb: Thumb, borderColor: "#FFDE59" },
@@ -67,50 +77,51 @@ const Slider = () => {
         <h1 className="pl-[18px]">avec nous</h1>
       </motion.div>
 
-      {/* CD roller navigation */}
-      <div className="absolute top-[40%] right-0 w-full flex justify-end items-center z-20">
-        <div className="relative h-[180px] w-full max-w-[400px] flex items-center justify-center">
+      {/* Navigation container - responsive positioning */}
+      <div
+        className={`absolute z-20 ${
+          isMobile
+            ? "bottom-[4%] left-0 w-full flex justify-center items-center"
+            : "top-[40%] right-0 w-full flex justify-end items-center"
+        }`}
+      >
+        <div
+          className={`relative ${
+            isMobile
+              ? "h-[120px] w-full max-w-[90vw] px-4"
+              : "h-[180px] w-full max-w-[400px]"
+          } flex items-center justify-center`}
+        >
           {slides.map((slide, index) => {
-            // Calculate the angle for this item (in a half-circle on the right side)
-            // 0 degrees = top, 180 degrees = bottom
-            const itemCount = slides.length;
+            // Calculate positions differently for mobile and desktop
+            let x, y, angle, radians;
 
-            // Calculate the angle for each item, evenly distributed in a half-circle
-            const angleStep = 180 / (itemCount - 1);
+            if (isMobile) {
+              // For mobile: horizontal layout
+              const spacing = 65; // Spacing between items
+              const centerOffset = (currentSlide - index) * spacing;
+              x = -centerOffset;
+              y = Math.abs(centerOffset) * 0.5; // Slight vertical offset for depth
+              angle = 0;
+              radians = 0;
+            } else {
+              // For desktop: semi-circular layout (existing logic)
+              const itemCount = slides.length;
+              const angleStep = 180 / (itemCount - 1);
+              const angleOffset = (currentSlide - index) * angleStep;
+              angle = 90 + angleOffset;
+              angle = Math.max(0, Math.min(180, angle));
+              radians = (angle * Math.PI) / 180;
+              const radius = 280;
+              const xOffset = 150;
+              x = -Math.abs(Math.sin(radians) * radius) + xOffset;
+              y = Math.cos(radians) * radius;
+            }
 
-            // Calculate position based on the current selected slide
-            // We want to center the current slide at 90 degrees (middle of the half-circle)
-            const angleOffset = (currentSlide - index) * angleStep;
-            let angle = 90 + angleOffset;
-
-            // Keep angle within the half-circle bounds (0-180 degrees)
-            if (angle < 0) angle = 0;
-            if (angle > 180) angle = 180;
-
-            // Convert to radians for calculations
-            const radians = (angle * Math.PI) / 180;
-
-            // Determine if this is the selected slide
             const isSelected = currentSlide === index;
-
-            // Calculate position on the right-side half-circle
-            // For a half-circle on the right side:
-            // x = radius * sin(angle) + offset
-            // y = radius * cos(angle) + offset
-            const radius = 280; // Radius of the circle
-            const xOffset = 150; // Distance from right edge
-            const yOffset = 0; // Vertical center offset
-
-            // Calculate position (sin for y because we're using 0 degrees as top)
-            const x = -Math.abs(Math.sin(radians) * radius) + xOffset;
-            const y = Math.cos(radians) * radius + yOffset;
-
-            // Size based on selection
-            const baseSize = 120; // Base size for hexagons
-            const selectedSize = baseSize * 1.6; // 60% larger when selected
+            const baseSize = isMobile ? 60 : 120;
+            const selectedSize = baseSize * (isMobile ? 1.3 : 1.6);
             const size = isSelected ? selectedSize : baseSize;
-
-            // Z-index to ensure selected item is on top
             const zIndex = isSelected ? 30 : 20;
 
             return (
@@ -123,10 +134,10 @@ const Slider = () => {
                   opacity: 1,
                   x: x,
                   y: y,
-                  top: "50%",
-                  right: "60%",
-                  marginTop: -size / 2, // Center vertically based on size
-                  marginRight: -size / 2, // Center horizontally based on size
+                  top: isMobile ? "50%" : "50%",
+                  right: isMobile ? "auto" : "60%",
+                  marginTop: -size / 2,
+                  marginRight: isMobile ? 0 : -size / 2,
                 }}
                 transition={{
                   duration: 0.5,
@@ -156,13 +167,11 @@ const Slider = () => {
                     alt={`nav ${index + 1}`}
                     className="object-cover clip-hexagon-inner"
                     animate={{
-                      width: size - 6, // Account for border
-                      height: size - 6, // Account for border
+                      width: size - 6,
+                      height: size - 6,
                     }}
                     transition={{ duration: 0.3 }}
                   />
-
-                  {/* Colored border */}
                   <motion.div
                     className="absolute inset-0 clip-hexagon"
                     initial={{ opacity: 0 }}
@@ -182,17 +191,19 @@ const Slider = () => {
         </div>
       </div>
 
-      {/* Add a separate gradient overlay */}
-
+      {/* Gradient overlay - responsive positioning */}
       <div
-        className="
-absolute -right-[25%] top-0 max-w-[700px] rounded-full rotate-180 h-[98%] flex items-center justify-center w-full
-"
+        className={`absolute ${
+          isMobile
+            ? "-bottom-[20%] left-0 w-full h-[200px]"
+            : "-right-[25%] top-0 max-w-[700px] h-[98%] rotate-180"
+        }`}
         style={{
-          background:
-            "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.8) 100%)",
+          background: isMobile
+            ? "linear-gradient(to top, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%)"
+            : "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.8) 100%)",
           backdropFilter: "blur(8px)",
-          borderRadius: "100%",
+          borderRadius: isMobile ? "50% 50% 0 0" : "100%",
         }}
       />
 
