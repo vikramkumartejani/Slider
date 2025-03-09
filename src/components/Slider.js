@@ -69,7 +69,7 @@ const Slider = () => {
 
       {/* CD roller navigation */}
       <div className="absolute top-[40%] right-0 w-full flex justify-end items-center z-20">
-        <div className="relative h-[180px]  w-full max-w-[400px] flex items-center justify-center">
+        <div className="relative h-[180px] w-full max-w-[400px] flex items-center justify-center">
           {slides.map((slide, index) => {
             // Calculate the angle for this item (in a half-circle on the right side)
             // 0 degrees = top, 180 degrees = bottom
@@ -107,7 +107,7 @@ const Slider = () => {
 
             // Size based on selection
             const baseSize = 120; // Base size for hexagons
-            const selectedSize = baseSize * 1.5; // 50% larger when selected
+            const selectedSize = baseSize * 1.6; // 60% larger when selected
             const size = isSelected ? selectedSize : baseSize;
 
             // Z-index to ensure selected item is on top
@@ -183,13 +183,18 @@ const Slider = () => {
       </div>
 
       {/* Add a separate gradient overlay */}
+
       <div
-        className="absolute inset-0"
+        className="
+absolute -right-[25%] top-0 max-w-[700px] rounded-full rotate-180 h-[98%] flex items-center justify-center w-full
+"
         style={{
           background:
-            "linear-gradient(306.46deg, rgba(70, 99, 172, 0) 31.38%, rgba(70, 99, 172, 0.52) 94.47%)",
+            "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.8) 100%)",
+          backdropFilter: "blur(8px)",
+          borderRadius: "100%",
         }}
-      ></div>
+      />
 
       <style jsx>{`
         .clip-hexagon {
