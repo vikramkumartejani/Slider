@@ -60,19 +60,12 @@ const Slider = () => {
 
             {/* Navigation buttons */}
             <motion.div 
-                className='absolute right-10 top-1/2 transform -translate-y-1/2 flex flex-col gap-6 z-20 items-center'
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4 }}
+                className='absolute right-10 top-1/2 transform -translate-y-1/2 flex flex-col gap-4 z-20 items-center'
             >
                 {slides.map((slide, index) => (
                     <motion.button
                         key={index}
                         onClick={() => setCurrentSlide(index)}
-                        className={`transition-all duration-300 transform hover:scale-110 ${
-                            currentSlide === index ? 'opacity-100 scale-110 border-4 border-yellow-500' : 'opacity-50'
-                        }`}
-                        whileHover={{ scale: 1.1 }}
                     >
                         <div className={`bg-white clip-hexagon flex items-center justify-center ${
                             currentSlide === index ? 'w-[120px] h-[120px]' : 'w-[100px] h-[100px]'
