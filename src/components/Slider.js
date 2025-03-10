@@ -8,6 +8,7 @@ import ThirdSliderImage from "../assets/third-slider-image.jpg";
 import FourthSliderImage from "../assets/fourth-slider-image.jpg";
 import FifthSliderImage from "../assets/fifth-slider-image.jpg";
 import Thumb from "../assets/thumb.svg";
+import Thumb6 from "../assets/Polygon 1.png";
 import Thumb2 from "../assets/thumb2.svg";
 import Thumb3 from "../assets/thumb3.svg";
 import Thumb4 from "../assets/thumb4.svg";
@@ -27,11 +28,11 @@ const Slider = () => {
   }, []);
 
   const slides = [
-    { image: FirstSliderImage, thumb: Thumb3, borderColor: "#FFDE59" },
-    { image: SecondSliderImage, thumb: Thumb2, borderColor: "#FF85A2" },
-    { image: ThirdSliderImage, thumb: Thumb, borderColor: "#FFDE59" },
-    { image: FourthSliderImage, thumb: Thumb4, borderColor: "#FF85A2" },
-    { image: FifthSliderImage, thumb: Thumb5, borderColor: "#FFDE59" },
+    { image: FirstSliderImage, thumb: Thumb6, borderColor: "#FFDE59" },
+    { image: SecondSliderImage, thumb: Thumb6, borderColor: "#FF85A2" },
+    { image: ThirdSliderImage, thumb: Thumb6, borderColor: "#FFDE59" },
+    { image: FourthSliderImage, thumb: Thumb6, borderColor: "#FF85A2" },
+    { image: FifthSliderImage, thumb: Thumb6, borderColor: "#FFDE59" },
   ];
 
   return (
@@ -49,7 +50,7 @@ const Slider = () => {
               objectFit: "cover",
             }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0.5, scale:1 }}
+            exit={{ opacity: 0.5, scale: 1 }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
           />
         </AnimatePresence>
@@ -71,7 +72,7 @@ const Slider = () => {
         <div
           className={`absolute h-full md:h-screen z-20 ${isMobile
             ? "bottom-0 md:bottom-[4%] left-0 w-full flex justify-center items-center"
-            : "top-0 right-0 w-full flex justify-end items-center"
+            : "top-0 right-0 w-[50%] flex justify-end items-center"
             }`}
         >
           <div
@@ -92,13 +93,13 @@ const Slider = () => {
                 radians = 0;
               } else {
                 const itemCount = slides.length;
-                const angleStep = 180 / (itemCount - 1);
+                const angleStep = 120 / (itemCount - 1);
                 const angleOffset = (currentSlide - index) * angleStep;
                 angle = 90 + angleOffset;
                 angle = Math.max(0, Math.min(180, angle));
                 radians = (angle * Math.PI) / 180;
-                const radius = 280;
-                const xOffset = 150;
+                const radius = 370;
+                const xOffset = 300;
                 x = -Math.abs(Math.sin(radians) * radius) + xOffset;
                 y = Math.cos(radians) * radius;
               }
@@ -114,13 +115,12 @@ const Slider = () => {
                   key={index}
                   onClick={() => setCurrentSlide(index)}
                   className="absolute"
-                  // initial={{ opacity: 0 }}
                   animate={{
                     opacity: 1,
                     x: x,
                     y: y,
                     top: isMobile ? "85%" : "50%",
-                    right: isMobile ? "auto" : "60%",
+                    right: isMobile ? "auto" : "55%",
                     marginTop: -size / 2,
                     marginRight: isMobile ? 0 : -size / 2,
                   }}
@@ -146,10 +146,10 @@ const Slider = () => {
                     <motion.img
                       src={slide.thumb}
                       alt={`nav ${index + 1}`}
-                      className="object-cover rotate-90"
+                      className="object-contain"
                       animate={{
-                        width: size - 6,
-                        height: size - 6,
+                        width: size - 7,
+                        height: size - 7,
                       }}
                     />
                   </motion.div>
@@ -158,6 +158,35 @@ const Slider = () => {
             })}
           </div>
         </div>
+
+        {/* Overlay behind navigation container on Desktop */}
+        <div
+          className="absolute right-0 w-[700px] md:block hidden h-screen z-10"
+          style={{
+            background: "linear-gradient(186.65deg, rgba(255, 255, 255, 0.71) 18.1%, rgba(255, 255, 255, 0.1633) 90.66%)",
+            backdropFilter: "blur(35.2px)",
+            borderRadius: "100%",
+            top: isMobile ? "auto" : "0",
+            bottom: isMobile ? "0" : "auto",
+            // left: "0",
+            right: "-450px",
+            margin: "auto"
+          }}
+        />
+        {/* Overlay behind navigation container on Mobile */}
+        <div
+          className="absolute w-full max-w-[320px] h-[300px] block md:hidden z-10"
+          style={{
+            background: "linear-gradient(180deg, rgba(217, 217, 217, 0.71) 0%, rgba(115, 115, 115, 0.71) 100%)",
+            backdropFilter: "blur(35.2px)",
+            borderRadius: "100%",
+            bottom: "-200px",
+
+            left: "50%",
+            transform: "translateX(-50%)",
+          }}
+        />
+
 
         {/* Gradient overlay - responsive positioning */}
         <div className="absolute top-0 left-0 w-full h-full md:block hidden"
