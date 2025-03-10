@@ -105,7 +105,7 @@ const Slider = () => {
               }
 
               const isSelected = currentSlide === index;
-              const baseSize = isMobile ? 60 : 120;
+              const baseSize = isMobile ? 60 : 140;
               const selectedSize = baseSize * (isMobile ? 1.3 : 1.6);
               const size = isSelected ? selectedSize : baseSize;
               const zIndex = isSelected ? 30 : 20;
