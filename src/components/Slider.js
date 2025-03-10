@@ -133,33 +133,19 @@ const Slider = () => {
                   }}
                 >
                   <motion.div
-                    className="clip-hexagon flex items-center justify-center relative w-full h-full"
+                    className="flex items-center justify-center relative w-full h-full"
                     animate={{
                       width: size,
                       height: size,
-                    }}
-                    style={{
-                      background: "white",
                     }}
                   >
                     <motion.img
                       src={slide.thumb}
                       alt={`nav ${index + 1}`}
-                      className="object-cover clip-hexagon"
+                      className="object-cover"
                       animate={{
                         width: size - 6,
                         height: size - 6,
-                      }}
-                    />
-                    <motion.div
-                      className="absolute inset-0 clip-hexagon"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      style={{
-                        border: `${isSelected ? 4 : 3}px solid ${slide.borderColor
-                          }`,
-                        width: "100%",
-                        height: "100%",
                       }}
                     />
                   </motion.div>
@@ -183,28 +169,7 @@ const Slider = () => {
           }}
         />
 
-        <style jsx>{`
-          .clip-hexagon {
-            clip-path: polygon(
-              25% 6.7%,
-              75% 6.7%,
-              100% 50%,
-              75% 93.3%,
-              25% 93.3%,
-              0% 50%
-            );
-          }
-          .clip-hexagon-inner {
-            clip-path: polygon(
-              25% 6.7%,
-              75% 6.7%,
-              100% 50%,
-              75% 93.3%,
-              25% 93.3%,
-              0% 50%
-            );
-          }
-        `}</style>
+
       </motion.div>
     </div>
   );
