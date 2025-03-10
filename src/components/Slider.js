@@ -119,7 +119,7 @@ const Slider = () => {
                     opacity: 1,
                     x: x,
                     y: y,
-                    top: isMobile ? "85%" : "50%",
+                    top: isMobile ? "80%" : "50%",
                     right: isMobile ? "auto" : "55%",
                     marginTop: -size / 2,
                     marginRight: isMobile ? 0 : -size / 2,
