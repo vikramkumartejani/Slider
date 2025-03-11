@@ -269,7 +269,6 @@ const Slider = () => {
           }}
         />
 
-
         {/* Gradient overlay - responsive positioning */}
         <div className="absolute top-0 left-0 w-full h-full md:block hidden"
           style={{
