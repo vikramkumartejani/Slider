@@ -27,11 +27,96 @@ const Slider = () => {
   }, []);
 
   const slides = [
-    { image: FirstSliderImage, thumb: Thumb, borderColor: "#FFDE59" },
-    { image: SecondSliderImage, thumb: Thumb5, borderColor: "#FF85A2" },
-    { image: ThirdSliderImage, thumb: Thumb2, borderColor: "#FFDE59" },
-    { image: FourthSliderImage, thumb: Thumb3, borderColor: "#FF85A2" },
-    { image: FifthSliderImage, thumb: Thumb4, borderColor: "#FFDE59" },
+    { 
+      image: FirstSliderImage, 
+      thumb: Thumb, 
+      borderColor: "#FFDE59",
+      text: (
+        <motion.div
+          className="md:block hidden w-full text-[30px] lg:text-[40px] xl:text-[48px] px-5 sm:pl-10 lg:pl-[80px] xl:pl-[150px] 2xl:pl-[300px] leading-[118%] font-normal text-white absolute top-20 lg:top-[122px] z-10"
+        >
+          <h1 className="pl-[18px] mb-1">Partagez vos</h1>
+          <motion.h1
+            className="font-bold bg-[#FFFFFF] text-[#4663AC] rounded-[18px] px-[18px] w-fit"
+          >
+            moments inoubliables
+          </motion.h1>
+          <h1 className="pl-[18px]">avec nous</h1>
+        </motion.div>
+      )
+    },
+    { 
+      image: SecondSliderImage, 
+      thumb: Thumb5, 
+      borderColor: "#FF85A2",
+      text: (
+        <motion.div
+          className="md:block hidden w-full text-[30px] lg:text-[40px] xl:text-[48px] px-5 sm:pl-10 lg:pl-[80px] xl:pl-[150px] 2xl:pl-[300px] leading-[118%] font-normal text-white absolute top-20 lg:top-[122px] z-10"
+        >
+          <h1 className="pl-[18px] mb-1">Découvrez nos</h1>
+          <motion.h1
+            className="font-bold bg-[#FFFFFF] text-[#4663AC] rounded-[18px] px-[18px] w-fit"
+          >
+            offres exclusives
+          </motion.h1>
+          <h1 className="pl-[18px]">maintenant</h1>
+        </motion.div>
+      )
+    },
+    { 
+      image: ThirdSliderImage, 
+      thumb: Thumb2, 
+      borderColor: "#FFDE59",
+      text: (
+        <motion.div
+          className="md:block hidden w-full text-[30px] lg:text-[40px] xl:text-[48px] px-5 sm:pl-10 lg:pl-[80px] xl:pl-[150px] 2xl:pl-[300px] leading-[118%] font-normal text-white absolute top-20 lg:top-[122px] z-10"
+        >
+          <h1 className="pl-[18px] mb-1">Explorez les</h1>
+          <motion.h1
+            className="font-bold bg-[#FFFFFF] text-[#4663AC] rounded-[18px] px-[18px] w-fit"
+          >
+            nouvelles tendances
+          </motion.h1>
+          <h1 className="pl-[18px]">avec nous</h1>
+        </motion.div>
+      )
+    },
+    { 
+      image: FourthSliderImage, 
+      thumb: Thumb3, 
+      borderColor: "#FF85A2",
+      text: (
+        <motion.div
+          className="md:block hidden w-full text-[30px] lg:text-[40px] xl:text-[48px] px-5 sm:pl-10 lg:pl-[80px] xl:pl-[150px] 2xl:pl-[300px] leading-[118%] font-normal text-white absolute top-20 lg:top-[122px] z-10"
+        >
+          <h1 className="pl-[18px] mb-1">Profitez de</h1>
+          <motion.h1
+            className="font-bold bg-[#FFFFFF] text-[#4663AC] rounded-[18px] px-[18px] w-fit"
+          >
+            nos services
+          </motion.h1>
+          <h1 className="pl-[18px]">exceptionnels</h1>
+        </motion.div>
+      )
+    },
+    { 
+      image: FifthSliderImage, 
+      thumb: Thumb4, 
+      borderColor: "#FFDE59",
+      text: (
+        <motion.div
+          className="md:block hidden w-full text-[30px] lg:text-[40px] xl:text-[48px] px-5 sm:pl-10 lg:pl-[80px] xl:pl-[150px] 2xl:pl-[300px] leading-[118%] font-normal text-white absolute top-20 lg:top-[122px] z-10"
+        >
+          <h1 className="pl-[18px] mb-1">Rejoignez notre</h1>
+          <motion.h1
+            className="font-bold bg-[#FFFFFF] text-[#4663AC] rounded-[18px] px-[18px] w-fit"
+          >
+            communauté
+          </motion.h1>
+          <h1 className="pl-[18px]">aujourd'hui</h1>
+        </motion.div>
+      )
+    },
   ];
 
   return (
@@ -55,17 +140,7 @@ const Slider = () => {
         </AnimatePresence>
 
         {/* Text content */}
-        <motion.div
-          className="md:block hidden w-full text-[30px] lg:text-[40px] xl:text-[48px] px-5 sm:pl-10 lg:pl-[80px] xl:pl-[150px] 2xl:pl-[300px] leading-[118%] font-normal text-white absolute top-20 lg:top-[122px] z-10"
-        >
-          <h1 className="pl-[18px] mb-1">Partagez vos</h1>
-          <motion.h1
-            className="font-bold bg-[#FFFFFF] text-[#4663AC] rounded-[18px] px-[18px] w-fit"
-          >
-            moments inoubliables
-          </motion.h1>
-          <h1 className="pl-[18px]">avec nous</h1>
-        </motion.div>
+        {slides[currentSlide].text}
 
         {/* Navigation container - responsive positioning */}
         <div
