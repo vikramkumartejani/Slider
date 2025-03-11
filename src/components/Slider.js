@@ -8,6 +8,11 @@ import ThirdSliderImage from "../assets/third-slider-image.jpg";
 import FourthSliderImage from "../assets/fourth-slider-image.jpg";
 import FifthSliderImage from "../assets/fifth-slider-image.jpg";
 import Thumb from "../assets/Polygon 3.png";
+import Video1 from "../assets/video.mp4";
+import Video2 from "../assets/video2.webm";
+import Video3 from "../assets/video.mp4";
+import Video4 from "../assets/video2.webm";
+import Video5 from "../assets/video.mp4";
 import Thumb2 from "../assets/Polygon 2.png";
 import Thumb3 from "../assets/Polygon 4.png";
 import Thumb4 from "../assets/Polygon 5.png";
@@ -28,7 +33,7 @@ const Slider = () => {
 
   const slides = [
     { 
-      image: FirstSliderImage, 
+      video: Video1, 
       thumb: Thumb, 
       borderColor: "#FFDE59",
       text: (
@@ -46,7 +51,7 @@ const Slider = () => {
       )
     },
     { 
-      image: SecondSliderImage, 
+      video: Video2, 
       thumb: Thumb5, 
       borderColor: "#FF85A2",
       text: (
@@ -64,7 +69,7 @@ const Slider = () => {
       )
     },
     { 
-      image: ThirdSliderImage, 
+      video: Video3, 
       thumb: Thumb2, 
       borderColor: "#FFDE59",
       text: (
@@ -82,7 +87,7 @@ const Slider = () => {
       )
     },
     { 
-      image: FourthSliderImage, 
+      video: Video4, 
       thumb: Thumb3, 
       borderColor: "#FF85A2",
       text: (
@@ -100,7 +105,7 @@ const Slider = () => {
       )
     },
     { 
-      image: FifthSliderImage, 
+      video: Video5, 
       thumb: Thumb4, 
       borderColor: "#FFDE59",
       text: (
@@ -125,14 +130,17 @@ const Slider = () => {
         className="md:h-screen h-[440px] overflow-hidden relative rounded-2xl md:rounded-none"
       >
         <AnimatePresence maintainExitVelocity={false}>
-          <motion.img
+          <motion.video
             key={currentSlide}
-            src={slides[currentSlide].image}
-            alt="image"
+            src={slides[currentSlide].video}
+            alt="video"
             className="h-full w-full"
             style={{
               objectFit: "cover",
             }}
+            autoPlay
+            loop
+            muted
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0.5, scale: 1 }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
