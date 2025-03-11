@@ -7,12 +7,11 @@ import SecondSliderImage from "../assets/second-slider-image.jpg";
 import ThirdSliderImage from "../assets/third-slider-image.jpg";
 import FourthSliderImage from "../assets/fourth-slider-image.jpg";
 import FifthSliderImage from "../assets/fifth-slider-image.jpg";
-import Thumb from "../assets/thumb.svg";
-import Thumb6 from "../assets/Polygon 1.png";
-import Thumb2 from "../assets/thumb2.svg";
-import Thumb3 from "../assets/thumb3.svg";
-import Thumb4 from "../assets/thumb4.svg";
-import Thumb5 from "../assets/thumb5.svg";
+import Thumb from "../assets/Polygon 3.png";
+import Thumb2 from "../assets/Polygon 2.png";
+import Thumb3 from "../assets/Polygon 4.png";
+import Thumb4 from "../assets/Polygon 5.png";
+import Thumb5 from "../assets/Polygon 1.png";
 
 const Slider = () => {
   const [currentSlide, setCurrentSlide] = useState(2);
@@ -28,11 +27,11 @@ const Slider = () => {
   }, []);
 
   const slides = [
-    { image: FirstSliderImage, thumb: Thumb6, borderColor: "#FFDE59" },
-    { image: SecondSliderImage, thumb: Thumb6, borderColor: "#FF85A2" },
-    { image: ThirdSliderImage, thumb: Thumb6, borderColor: "#FFDE59" },
-    { image: FourthSliderImage, thumb: Thumb6, borderColor: "#FF85A2" },
-    { image: FifthSliderImage, thumb: Thumb6, borderColor: "#FFDE59" },
+    { image: FirstSliderImage, thumb: Thumb, borderColor: "#FFDE59" },
+    { image: SecondSliderImage, thumb: Thumb5, borderColor: "#FF85A2" },
+    { image: ThirdSliderImage, thumb: Thumb2, borderColor: "#FFDE59" },
+    { image: FourthSliderImage, thumb: Thumb3, borderColor: "#FF85A2" },
+    { image: FifthSliderImage, thumb: Thumb4, borderColor: "#FFDE59" },
   ];
 
   return (
